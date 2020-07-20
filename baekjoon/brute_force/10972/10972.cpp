@@ -9,6 +9,9 @@ vector<int> v;
 
 int main(){
     
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    
     int N, input, base, min = INT_MAX;
     vector<int>::iterator index;
     vector<int> t;

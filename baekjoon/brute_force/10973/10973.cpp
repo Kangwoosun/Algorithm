@@ -9,6 +9,8 @@ bool comp(int a, int b) {
 
 int main(){
     
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
     int N, input, index= 0, basic, max=0;
     vector<int> v, t;
     cin >> N;
