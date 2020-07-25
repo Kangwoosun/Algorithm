@@ -4,46 +4,36 @@ using namespace std;
 
 
 int N, M;
-int v[10];
+
 int arr[10];
-void Print(){
-    
-    for(int i =0; i<M; ++i){
-        cout << arr[i] << ' ';
-    }
-    
-    cout << endl;
-    return;
-}
 
-
-void combination(int idx, int r, int depth){
+void combination(int r, int depth){
     
     if(depth == r){
-        Print();
+            for(int i =0; i<r; ++i){
+                cout << arr[i] << ' ';
+            }
+        
+        cout << '\n';
         return;
     }
     
     for(int i =0; i<N; ++i){
-        
-        
-        arr[depth] = v[i];
-        combination(i, r, depth+1);
-        
+
+        arr[depth] = i+1;
+        combination(r, depth+1);
     }
     return;
-    
 }
 
 int main(){
     
-    
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+
     cin >> N >> M;
-    for(int i=0; i<N; ++i){
-        v[i] = i+1;
-    }
     
-    combination(0,M,0);
+    combination(M,0);
     
     return 0;
     
