@@ -1,4 +1,0 @@
-break /home/ubuntu/environment/Algorithm/baekjoon/brute_force_NM/15650/15650.cpp:32
-break /home/ubuntu/environment/Algorithm/baekjoon/brute_force_NM/15650/15650.cpp:28
-
-set exec-wrapper The wrapper for running programs is \
