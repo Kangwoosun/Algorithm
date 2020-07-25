@@ -5,23 +5,25 @@
 using namespace std;
 
 
-int N, base, min, index = 0 ,input;
-int oper[4], A[12];
-long long result_max = INT_MIN, result_min = INT_MAX, result;
+int N;
+int oper[4], A[12], tmp[12];
 
+int oper_sum = 0;
 
-bool _check[11];
+int result_max = INT_MIN, result_min = INT_MAX;
 
 void calc(){
     
+    int result, base, min, index = 0; 
     bool check;
     
     vector<int> v, t;
     
-    for(int i =0; i<N; ++i){
-        if(_check[i] == true)
-            v.push_back(i);
+    for(int i =0; i<N-1; ++i){
+        v.push_back(tmp[i]);
+        
     }
+    
     
     while(1){
         
@@ -111,21 +113,46 @@ void calc(){
 void combination(int idx, int cur){
     
     if(cur == N-1){
-        calc();
+        
+        int plus=0, minus=0, multiple=0, divide=0;
+        
+        for(int i =0; i<N-1; i++){
+            switch(tmp[i]){
+                case 0:
+                    plus++;
+                    break;
+                case 1:
+                    minus++;            
+                    break;  
+                case 2:
+                    multiple++;
+                    break;
+                case 3:
+                    divide++;
+                    break;
+                default:
+                break;
+            }
+        }
+        
+        if(plus <= oper[0] && minus <= oper[1] && multiple <= oper[2] && divide <= oper[3])
+            calc();
+        
         return;
     }
-    
-    for(int i = idx; i<N; i++){
+    for(int i = idx; i<4; i++){
         
-        
-        
+        tmp[cur] = i;
+        combination(i, cur+1);
         
     }
-    
+    return;
 }
 
 
 int main(){
+    
+    int input;
     
     cin.tie(NULL);
     ios::sync_with_stdio(false);
@@ -141,7 +168,10 @@ int main(){
     for(int i =0; i<4; ++i){
         cin >> input;
         oper[i] = input;
+        oper_sum += input;
     }
+    
+    
     /*
      * [0] = +
      * [1] = -
