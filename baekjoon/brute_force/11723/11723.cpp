@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
-#include <cstring>
 
 using namespace std;
 
 int main(){
-    /*
+    
+    
     cin.tie(NULL);
     ios::sync_with_stdio(false);
-    */
+    
     int M, S[21] = {0,}, x;
     string command;
     
@@ -44,11 +44,13 @@ int main(){
         
         else if (command == "all"){
             
-            memset(S, 1, sizeof(S));
+            for(int i =1; i<=20; ++i)
+                S[i] = 1;
         }
         
         else if (command == "empty"){
-            memset(S, 0, sizeof(S));
+            for(int i =1; i<=20; ++i)
+                S[i] = 0;
         }
         
         
