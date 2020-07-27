@@ -86,7 +86,7 @@ int main(){
             v[b].push_back(a);
         }
         
-        /*
+        /* DFS
         for(int j=1; j<=V; ++j){
             
             if(!visit[j]){
@@ -99,6 +99,8 @@ int main(){
         }
         
         */
+        
+        // BFS
         for(int j =1; j<= V; ++ j){
             if(!visit[j]){
                 if(bfs(j,RED)){
