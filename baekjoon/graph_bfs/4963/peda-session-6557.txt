@@ -1,3 +1,0 @@
-break /home/ubuntu/environment/Algorithm/baekjoon/graph_bfs/4963/4963.cpp:34
-
-set exec-wrapper The wrapper for running programs is \
