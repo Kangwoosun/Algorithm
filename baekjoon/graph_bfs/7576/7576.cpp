@@ -1,9 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <utility>
 #include <queue>
-#include <climits>
-#include <cstring>
 using namespace std;
 
 int N, M;
@@ -13,15 +10,7 @@ int mx[] = {0, 0, 1, -1};
 int my[] = {1, -1, 0, 0};
 
 
-class node{
-public:
-    node(int x, int y, int depth):x(x),y(y),depth(depth){};
-    int x;
-    int y;
-    int depth;
-};
-
-queue<node*> q;
+queue<pair<int,int>> q;
 
 bool isin(int x, int y ){
     return (1<=x && x<=N && 1<=y && y<=M ? true : false);
@@ -30,23 +19,32 @@ bool isin(int x, int y ){
 int bfs(){
     
     int count = 0;
-    node* tmp;
-    
+    int bef = q.size();
+    int cur;
+    bool next;
     while(!q.empty()){
-        tmp = q.front();
-        q.pop();
-        count = tmp->depth;
-        
-        for(int i =0; i<4; ++i){
-            int _x = tmp->x + mx[i];
-            int _y = tmp->y + my[i];
+        cur = 0;
+        next = false;
+        for(int i =0; i<bef; ++i){
             
-            if(isin(_x, _y) && !visit[_x][_y] && v[_x][_y] == 0){
-                visit[_x][_y] = true;
-                q.push(new node(_x, _y, tmp->depth +1));
+            auto [x,y] = q.front();
+            q.pop();
+            
+            for(int i =0; i<4; ++i){
+                int _x = x + mx[i];
+                int _y = y + my[i];
+                
+                if(isin(_x, _y) && !visit[_x][_y] && v[_x][_y] == 0){
+                    visit[_x][_y] = true;
+                    q.push(make_pair(_x, _y));
+                    next = true;
+                    cur++;
+                }
             }
+            
         }
-        delete tmp;
+        bef = cur;
+        if(next) count++;
     }
     
     return count;
@@ -66,7 +64,7 @@ int main(){
             cin >> input;
             v[i][j] = input;
             if(input == 1)
-                q.push(new node(i, j, 0));
+                q.push(make_pair(i, j));
         }
     }
     
@@ -74,11 +72,9 @@ int main(){
     
     for(int i =1; i<=N; ++i){
         for(int j =1; j<=M; ++j){
-            if(v[i][j] == 0){
-                if(visit[i][j] == false){
-                    cout << -1;
-                    return 0;
-                }
+            if(v[i][j] == 0 && !visit[i][j]){
+                cout << -1;
+                return 0;
             }
         }
     }
