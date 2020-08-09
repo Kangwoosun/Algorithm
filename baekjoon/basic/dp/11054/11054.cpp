@@ -31,7 +31,6 @@ int dp(int n){
         }
         r[i] = min + 1;
         
-        cout << i << ' ' << l[i] << ' ' << r[i] << endl;
         
         result = max(result, r[i] + l[i]-1);
     }
