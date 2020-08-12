@@ -8,10 +8,8 @@ int main(){
     
      cin >> N;
     
-    for(i =10; i<N; i*=10){
+    for(i =10; i<=N; i*=10){
         idx++;
-        
-        cout << count << ' ' << idx << endl;
         
         count += idx *i/10*9;
     }
