@@ -6,7 +6,8 @@ using namespace std;
 
 char comp[10];
 vector<int> v;
-int k, large = -1, small = INT_MAX;
+int k;
+long long large = -1, small = 9999999999;
 string large_str, small_str;
 
 void permutation(int start, int end){
@@ -33,37 +34,39 @@ void permutation(int start, int end){
        
         if(check){
             string tmp = "";
-            int comp;
+            long long comper;
             for(int i =0; i<=k; ++i){
                 tmp += to_string(v[i]);
             }
-            comp = stoi(tmp);
+            //cout << tmp << endl;
+            comper = stoll(tmp);
             
             
-            if(comp > large){
+            if(comper > large){
                 large_str.clear();
                 large_str.assign(tmp);
-                large = comp;
-                
+                large = comper;
+                /*
                 for(auto& e : v){
                     cout << e << ' ';
                 }
                 cout << endl;
                 cout << large << ' ' << large_str << ' ' << small << ' ' << small_str << endl;
-                
+                */
             }
             
-            if(comp < small){
+            if(comper < small){
                 small_str.clear();
                 small_str.assign(tmp);
-                small = comp;
-                
+                small = comper;
+                /*
                 for(auto& e : v){
                     cout << e << ' ';
                 }
+                
                 cout << endl;
                 cout << large << ' ' << large_str << ' ' << small << ' ' << small_str << endl;
-                
+                */
             }
         }
         
