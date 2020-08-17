@@ -1,18 +1,51 @@
 #include <iostream>
 #include <string>
-#include <climits>
+#include <vector>
+#include <utility>
 using namespace std;
 
-char comp[10];
+pair<int,bool> store[26];
 vector<int> v;
-int k;
-long long large = -1, small = 9999999999;
-string large_str, small_str;
+vector<string> s;
+int N;
+int large = -1;
+
+int make_int(string str_){
+    
+    string tmp = "";
+    
+    for(auto& e : str_){
+        tmp += to_string(store['A'-e].first);
+    }
+    
+    return stoi(tmp);
+}
+
+
 
 void permutation(int start, int end){
     
     if(start == end){
-    
+        
+        int count = 0, result = 0;
+        for(int i = 0; i<26; ++i){
+            if(store[i].second){
+                
+                store[i].first = v[count];
+                count++;
+            }
+        }
+        
+        for(auto& i : v){
+            cout << i << ' ';
+        }
+        cout << endl;
+        for(int i =0; i<N; ++i)
+            result += make_int(s[i]);
+        
+        if(large < result)
+            large = result;
+        cout << large << endl;
         
         return;
     }
@@ -34,19 +67,25 @@ void permutation(int start, int end){
 int main(){
     string input;
     
-    cin >> k;
+    cin >> N;
     
-    for(int i =0 ; i<k; ++i){
+    for(int i =0 ; i<N; ++i){
         cin >> input;
+        s.push_back(input);
+        
+        for(int j = 0; j<input.size(); ++j){
+            store['A'-input[j]].second = true;
+        }
+        
     }
     
-    for(int i =0; i<=9; ++i)
+    for(int i =0; i<=9; ++i){
         v.push_back(i);
-       
+    }
+    
     permutation(0, v.size()-1);
     
-    cout << large_str << '\n';
-    cout << small_str;
+    cout << large;
     
     return 0;
 }
